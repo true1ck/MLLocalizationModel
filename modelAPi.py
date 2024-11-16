@@ -48,7 +48,7 @@ def test_model(new_data):
 
     return predicted_class_label
 
-# Route to serve the index page
+# Route to serve the index page (for frontend purposes)
 @app.route('/')
 def index():
     return render_template('index.html')
