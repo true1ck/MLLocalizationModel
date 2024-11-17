@@ -53,7 +53,7 @@ def test_model(new_data):
 @app.route('/')
 def index():
     return render_template('index.html', grid_data=grid_data)
-# Route to serve the index page (for frontend purposes)
+
 @app.route('/Test')
 def showPos():
     return render_template('showPos.html')
@@ -75,6 +75,7 @@ def predict():
         return jsonify({'error': str(e)}), 400
     except Exception as e:
         return jsonify({'error': 'An error occurred while processing the request'}), 500
+
 @app.route('/predictShow', methods=['POST'])
 def predict_show():
     try:
@@ -113,6 +114,17 @@ def predict_show():
 @app.route('/getGridData', methods=['GET'])
 def get_grid_data():
     return jsonify(grid_data)
+
+@app.route('/delete', methods=['POST'])
+def delete_all_grid_entries():
+    try:
+        # Clear the grid_data dictionary
+        grid_data.clear()
+        
+        return jsonify({'message': 'All grid entries have been deleted'}), 200
+
+    except Exception as e:
+        return jsonify({'error': 'An error occurred while deleting grid entries'}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
